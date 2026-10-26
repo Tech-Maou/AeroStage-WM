@@ -246,8 +246,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "0.0.0-SNAPSHOT";
-				PRODUCT_BUNDLE_IDENTIFIER = bobko.aerospace.debug;
-				PRODUCT_NAME = "AeroSpace-Debug";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.tech-maou.AeroStageWM.debug;
+				PRODUCT_NAME = "AeroStage WM-Debug";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 6.2;
 			};
@@ -324,8 +324,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "0.0.0-SNAPSHOT";
-				PRODUCT_BUNDLE_IDENTIFIER = bobko.aerospace;
-				PRODUCT_NAME = AeroSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.tech-maou.AeroStageWM;
+				PRODUCT_NAME = "AeroStage WM";
 				SDKROOT = macosx;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 6.2;

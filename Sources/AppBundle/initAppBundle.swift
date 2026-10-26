@@ -64,7 +64,7 @@ struct ServerArgs: Sendable {
 }
 
 private let serverHelp = """
-    USAGE: \(CommandLine.arguments.first ?? "AeroSpace.app/Contents/MacOS/AeroSpace") [<options>]
+    USAGE: \(CommandLine.arguments.first ?? "AeroStage WM.app/Contents/MacOS/AeroStage WM") [<options>]
 
     OPTIONS:
       -h, --help              Print help
