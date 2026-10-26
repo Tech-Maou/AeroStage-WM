@@ -22,3 +22,6 @@
 # XCode User settings
 xcuserdata/
 xcshareddata/
+
+# App bundle built by scripts/bundle.sh
+/build
