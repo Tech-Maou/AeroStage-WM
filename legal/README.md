@@ -2,6 +2,10 @@
 
 The AeroSpace itself is licensed under MIT. See [LICENSE](./LICENSE.txt) for the full license text.
 
+AeroStage WM is a fork of AeroSpace and is licensed under the same MIT license; the root
+[LICENSE.txt](../LICENSE.txt) keeps the original copyright notice and adds one for the fork's
+modifications.
+
 ## Bundled dependencies and materials
 
 AeroSpace bundles the following dependencies and uses the following materials:
