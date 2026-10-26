@@ -44,7 +44,8 @@ cp docs/config-examples/default-config.toml "$APP/Contents/Resources/default-con
 printf 'APPL????' > "$APP/Contents/PkgInfo"
 
 # The asset catalog needs actool (Xcode). Build the app icon with iconutil instead.
-ICON_SRC=resources/Assets.xcassets/AppIcon.appiconset/icon.png
+# AeroStage WM has its own icon; AeroSpace's icon is not used.
+ICON_SRC=resources/aerostage-wm/icon.png
 ICONSET="$(mktemp -d)/AppIcon.iconset"
 mkdir -p "$ICONSET"
 for size in 16 32 128 256 512; do

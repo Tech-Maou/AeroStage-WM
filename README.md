@@ -84,7 +84,16 @@ concern that led to a `window-closed` event being declined upstream.
 AeroStage WM and AeroSpace must not run at the same time; quit and remove AeroSpace first
 (`brew uninstall --cask aerospace`). Your `~/.aerospace.toml` stays and is used as is.
 
-Build from source (Xcode is not required, the Command Line Tools are enough):
+With Homebrew (from the first release on):
+
+```bash
+brew install --cask tech-maou/tap/aerostage-wm
+```
+
+The app is signed with a self-signed certificate and not notarized by Apple (no paid Apple
+developer account), so the cask removes the quarantine attribute after installation.
+
+Or build from source (Xcode is not required, the Command Line Tools are enough):
 
 ```bash
 git clone https://github.com/Tech-Maou/AeroStage-WM.git
@@ -109,6 +118,8 @@ ln -s "/Applications/AeroStage WM.app/Contents/Resources/bin/aerostage-wm" /opt/
 - Versions name the AeroSpace release they are based on, e.g. `v0.21.3-stage.1` is the first
   AeroStage WM release on top of AeroSpace `v0.21.3-Beta`.
 - `main` is the released state, `dev` is where changes are made and tested.
+- `scripts/release.sh [version]` builds `dist/AeroStage-WM-v<version>.zip` for a GitHub release,
+  prints its SHA256 and updates the cask in `../homebrew-tap` if it is checked out there.
 
 ## Tests
 
