@@ -50,6 +50,8 @@ window-detected:: Fired when a new window is detected. Includes `windowId`, `wor
 
 binding-triggered:: Fired when a keyboard binding is triggered. Includes `binding`, `mode`.
 
+workspace-windows-changed:: Fired after a refresh when the set of windows on a workspace changed: a window appeared, was closed, minimized, unminimized or moved to another workspace. Includes `workspace` and `windowIds`, the ids of all windows now on that workspace (empty when the workspace became empty). Not fired while the screen is locked. Not sent as initial state. (AeroStage WM)
+
 // =========================================================== Output Format
 include::util/conditional-output-format-header.adoc[]
 

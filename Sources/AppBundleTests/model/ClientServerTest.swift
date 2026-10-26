@@ -85,6 +85,12 @@ final class ClientServerTest: XCTestCase {
 
             (.bindingTriggered(mode: "main", binding: "alt-h"),
              #"{"_event":"binding-triggered","binding":"alt-h","mode":"main"}"#),
+
+            (.workspaceWindowsChanged(workspace: "2", windowIds: [12, 34]),
+             #"{"_event":"workspace-windows-changed","windowIds":[12,34],"workspace":"2"}"#),
+
+            (.workspaceWindowsChanged(workspace: "3", windowIds: []),
+             #"{"_event":"workspace-windows-changed","windowIds":[],"workspace":"3"}"#),
         ]
         for (event, expectedJson) in testData {
             let data = try! encoder.encode(event)
@@ -101,6 +107,7 @@ final class ClientServerTest: XCTestCase {
             (#"{"_event":"mode-changed","mode":"resize"}"#, .modeChanged),
             (#"{"_event":"window-detected","windowId":456}"#, .windowDetected),
             (#"{"_event":"binding-triggered","mode":"main","binding":"alt-h"}"#, .bindingTriggered),
+            (#"{"_event":"workspace-windows-changed","workspace":"2","windowIds":[12]}"#, .workspaceWindowsChanged),
         ]
         for (json, expectedEventType) in testData {
             let data = json.data(using: .utf8)!

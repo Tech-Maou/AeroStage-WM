@@ -25,7 +25,7 @@ that the CLI is called `aerostage-wm` instead of `aerospace`.
 | Socket, caches, login item | `bobko.aerospace…` | `io.github.tech-maou.AeroStageWM…` |
 | Config file | `~/.aerospace.toml` | **the same file**, existing configs keep working |
 | Build | Xcode | Command Line Tools are enough (`scripts/bundle.sh`) |
-| `subscribe` events | 6 | planned: closed, minimized and moved windows, emptied workspaces |
+| `subscribe` events | 6 | 7: adds `workspace-windows-changed` (see below) |
 
 All other code, commands and the JSON output of the CLI are unchanged.
 
@@ -61,6 +61,23 @@ its logo. A modified app under the same name would look like the original or an 
 build. Technically the original bundle ID, CLI name and socket path would also collide with
 an installed AeroSpace and take over its Accessibility permission. AeroStage WM therefore
 uses its own name, bundle ID, CLI name, paths and icon.
+
+## The `workspace-windows-changed` event
+
+```
+{"_event":"workspace-windows-changed","windowIds":[123,456],"workspace":"2"}
+```
+
+Sent after a refresh whenever the set of windows on a workspace changed: a window appeared,
+was closed, minimized, unminimized or moved to another workspace. `windowIds` lists all
+windows now on that workspace; it is empty when the workspace became empty. A move fires the
+event for both workspaces.
+
+It describes AeroSpace's model after it has been reconciled, not raw accessibility
+notifications, and it is **not sent while the screen is locked**. During a lock the
+accessibility API makes all windows look closed and AeroSpace restores them on unlock; the
+event simply skips that period, so subscribers never see phantom closes. This addresses the
+concern that led to a `window-closed` event being declined upstream.
 
 ## Installation
 

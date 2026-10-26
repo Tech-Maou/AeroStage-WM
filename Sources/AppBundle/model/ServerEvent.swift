@@ -19,6 +19,8 @@ public struct ServerEvent: Codable, Sendable {
     private var mode: String?
     // periphery:ignore - false positive unused warning. The var properties are serialized to JSON
     private var binding: String?
+    // periphery:ignore - false positive unused warning. The var properties are serialized to JSON
+    private var windowIds: [UInt32]?
 
     public var eventType: ServerEventType { _event }
 
@@ -44,5 +46,9 @@ public struct ServerEvent: Codable, Sendable {
 
     public static func bindingTriggered(mode: String, binding: String) -> ServerEvent {
         ServerEvent(_event: .bindingTriggered, mode: mode, binding: binding)
+    }
+
+    public static func workspaceWindowsChanged(workspace: String, windowIds: [UInt32]) -> ServerEvent {
+        ServerEvent(_event: .workspaceWindowsChanged, workspace: workspace, windowIds: windowIds)
     }
 }
