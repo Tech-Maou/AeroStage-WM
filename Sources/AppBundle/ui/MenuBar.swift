@@ -62,7 +62,7 @@ public func menuBar(viewModel: TrayMenuModel, hideMenuBarItem: Binding<Bool> = .
                             .run(.defaultEnv, .emptyStdin)
                     }
                 }
-            }.keyboardShortcut("E", modifiers: .command)
+            }
             getExperimentalUISettingsMenu(viewModel: viewModel)
             openConfigButton()
             reloadConfigButton(warningsAsErrors: false)
@@ -76,7 +76,7 @@ public func menuBar(viewModel: TrayMenuModel, hideMenuBarItem: Binding<Bool> = .
                 terminationHandler?.beforeTermination()
                 terminateApp()
             }
-        }.keyboardShortcut("Q", modifiers: .command)
+        }
     } label: {
         switch (viewModel.axPermissionStatus, viewModel.isEnabled) {
             case (.granted, true):

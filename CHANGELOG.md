@@ -2,6 +2,11 @@
 
 AeroStage WM versions name the AeroSpace release they are based on.
 
+## 0.21.3-stage.4
+
+- The menu items "Quit" and "Enable/Disable" no longer have the shortcuts ⌘Q and ⌘E, so
+  AeroStage WM cannot be quit or disabled by accident from its (usually hidden) menu.
+
 ## 0.21.3-stage.3
 
 - `workspace-windows-changed` is also sent when a window switches between floating and tiling,
