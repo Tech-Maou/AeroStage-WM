@@ -26,6 +26,9 @@ that the CLI is called `aerostage-wm` instead of `aerospace`.
 | Config file | `~/.aerospace.toml` | **the same file**, existing configs keep working |
 | Build | Xcode | Command Line Tools are enough (`scripts/bundle.sh`) |
 | `subscribe` events | 6 | 7: adds `workspace-windows-changed` (see below) |
+| Menu bar item | always shown | can be hidden (user default `hideMenuBarItem`, set by AeroStage), stays visible while Accessibility permission is missing |
+| Quitting | windows of hidden workspaces stay parked in the screen corner unless quit from the menu | windows return to the screen on every regular quit (menu, quit Apple Event, SIGTERM); macOS may not terminate it on its own |
+| Menu shortcuts | ⌘Q quits, ⌘E enables/disables | no ⌘Q/⌘E, so it cannot be quit or disabled by accident |
 
 All other code, commands and the JSON output of the CLI are unchanged.
 
@@ -81,14 +84,18 @@ concern that led to a `window-closed` event being declined upstream.
 
 ## Installation
 
-AeroStage WM and AeroSpace must not run at the same time; quit and remove AeroSpace first
-(`brew uninstall --cask aerospace`). Your `~/.aerospace.toml` stays and is used as is.
-
-With Homebrew (from the first release on):
+AeroStage WM replaces AeroSpace; only one of them may run. Both read `~/.aerospace.toml`, so
+your config carries over, and both would start at login. Remove AeroSpace first:
 
 ```bash
+brew uninstall --cask aerospace   # keeps ~/.aerospace.toml
 brew install --cask tech-maou/tap/aerostage-wm
 ```
+
+Homebrew refuses to install or upgrade AeroStage WM while the `aerospace` cask is installed.
+Installing [AeroStage](https://github.com/Tech-Maou/AeroStage) (`tech-maou/tap/aerostage`)
+brings AeroStage WM along. The cask puts `aerostage-wm` on your `PATH`, and on
+`brew upgrade` it quits AeroStage WM (its windows return to the screen) and opens it again.
 
 The app is signed with a self-signed certificate and not notarized by Apple (no paid Apple
 developer account), so the cask removes the quarantine attribute after installation.
@@ -103,11 +110,11 @@ cp -R "build/AeroStage WM.app" /Applications/
 ```
 
 Then launch AeroStage WM and allow it under **System Settings → Privacy & Security →
-Accessibility**. `scripts/bundle.sh` signs with a code signing certificate named
+Accessibility**. `scripts/bundle.sh` signs with the certificate "AeroStage Release" or
 "AeroStage Dev" if one exists (stable signatures keep the permission across rebuilds),
 otherwise ad-hoc.
 
-For the CLI on your `PATH`:
+For the CLI on your `PATH` (a build from source only; the cask does this itself):
 
 ```bash
 ln -s "/Applications/AeroStage WM.app/Contents/Resources/bin/aerostage-wm" /opt/homebrew/bin/aerostage-wm
@@ -115,7 +122,7 @@ ln -s "/Applications/AeroStage WM.app/Contents/Resources/bin/aerostage-wm" /opt/
 
 ## Versions and branches
 
-- Versions name the AeroSpace release they are based on, e.g. `v0.21.3-stage.1` is the first
+- Versions name the AeroSpace release they are based on, e.g. `v0.21.3-stage.4` is the fourth
   AeroStage WM release on top of AeroSpace `v0.21.3-Beta`.
 - `main` is the released state, `dev` is where changes are made and tested.
 - `scripts/release.sh [version]` builds `dist/AeroStage-WM-v<version>.zip` for a GitHub release,
