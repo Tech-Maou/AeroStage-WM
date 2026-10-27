@@ -13,6 +13,12 @@ import Foundation
             interceptTermination(SIGINT)
             interceptTermination(SIGKILL)
         }
+        // AeroStage WM: bring windows of hidden workspaces back from the screen corner on every regular
+        // quit (quit Apple Event, SIGTERM from Activity Monitor or an update), not only via the menu.
+        if !isDebug { interceptTermination(SIGTERM) }
+        NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
+            MainActor.assumeIsolated { terminationHandler?.beforeTermination() }
+        }
 
         await bootstrapConfig_nonCancellable()
         _ = await reloadConfig_nonCancellable()
