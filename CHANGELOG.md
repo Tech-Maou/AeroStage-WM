@@ -2,6 +2,13 @@
 
 AeroStage WM versions name the AeroSpace release they are based on.
 
+## 0.21.3-stage.2
+
+- The menu bar item can be hidden (user default `hideMenuBarItem`), so AeroStage can show its
+  own item with the stage number. It stays visible while accessibility permission is missing.
+- Signed with the long-lived "AeroStage Release" certificate, so the Accessibility permission
+  survives future updates (one more approval when updating from 0.21.3-stage.1).
+
 ## 0.21.3-stage.1
 
 First release, based on AeroSpace v0.21.3-Beta.

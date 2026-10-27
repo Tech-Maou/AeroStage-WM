@@ -3,8 +3,14 @@ import Foundation
 import SwiftUI
 
 @MainActor
-public func menuBar(viewModel: TrayMenuModel) -> some Scene { // todo should it be converted to "SwiftUI struct"?
-    MenuBarExtra {
+public func menuBar(viewModel: TrayMenuModel, hideMenuBarItem: Binding<Bool> = .constant(false)) -> some Scene { // todo should it be converted to "SwiftUI struct"?
+    // AeroStage WM: AeroStage shows its own menu bar item and hides this one through the
+    // "hideMenuBarItem" user default. Without accessibility permission it stays visible as a warning.
+    let isInserted = Binding(
+        get: { !hideMenuBarItem.wrappedValue || viewModel.axPermissionStatus != .granted },
+        set: { hideMenuBarItem.wrappedValue = !$0 },
+    )
+    return MenuBarExtra(isInserted: isInserted) {
         let shortIdentification = "\(aeroSpaceAppName) v\(aeroSpaceAppVersion) \(gitShortHash)"
         let identification      = "\(aeroSpaceAppName) v\(aeroSpaceAppVersion) \(gitHash)"
         Text(shortIdentification)

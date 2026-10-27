@@ -8,13 +8,14 @@ struct AeroSpaceApp: App {
     @StateObject var viewModel = TrayMenuModel.shared
     @StateObject var messageModel = MessageModel.shared
     @Environment(\.openWindow) var openWindow: OpenWindowAction
+    @AppStorage("hideMenuBarItem") var hideMenuBarItem = false // AeroStage WM
 
     init() {
         initAppBundle()
     }
 
     var body: some Scene {
-        menuBar(viewModel: viewModel)
+        menuBar(viewModel: viewModel, hideMenuBarItem: $hideMenuBarItem)
         getMessageWindow(messageModel: messageModel)
             .onChange(of: messageModel.message) { message in
                 if message != nil {
