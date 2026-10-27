@@ -16,6 +16,10 @@ import Foundation
         // AeroStage WM: bring windows of hidden workspaces back from the screen corner on every regular
         // quit (quit Apple Event, SIGTERM from Activity Monitor or an update), not only via the menu.
         if !isDebug { interceptTermination(SIGTERM) }
+        // With its menu bar item hidden, the app has no visible UI, and macOS may then terminate it on
+        // its own under memory pressure (automatic/sudden termination), leaving windows parked.
+        ProcessInfo.processInfo.disableAutomaticTermination("AeroStage WM manages windows")
+        ProcessInfo.processInfo.disableSuddenTermination()
         NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
             MainActor.assumeIsolated { terminationHandler?.beforeTermination() }
         }

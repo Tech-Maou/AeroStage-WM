@@ -6,6 +6,9 @@ AeroStage WM versions name the AeroSpace release they are based on.
 
 - The menu bar item can be hidden (user default `hideMenuBarItem`), so AeroStage can show its
   own item with the stage number. It stays visible while accessibility permission is missing.
+- macOS no longer quits AeroStage WM on its own under memory pressure. Without a visible menu
+  bar item it counted as an app without UI that may be terminated automatically, which left
+  windows parked in the screen corner.
 - Windows of hidden workspaces are brought back from the screen corner on every regular quit
   (quit Apple Event, SIGTERM), not only when quitting from the menu.
 - Signed with the long-lived "AeroStage Release" certificate, so the Accessibility permission
