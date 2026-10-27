@@ -2,6 +2,11 @@
 
 AeroStage WM versions name the AeroSpace release they are based on.
 
+## 0.21.3-stage.3
+
+- `workspace-windows-changed` is also sent when a window switches between floating and tiling,
+  so AeroStage shows the current state right away, also after a keyboard shortcut.
+
 ## 0.21.3-stage.2
 
 - The menu bar item can be hidden (user default `hideMenuBarItem`), so AeroStage can show its

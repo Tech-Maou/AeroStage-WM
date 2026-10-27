@@ -68,9 +68,9 @@ uses its own name, bundle ID, CLI name, paths and icon.
 {"_event":"workspace-windows-changed","windowIds":[123,456],"workspace":"2"}
 ```
 
-Sent after a refresh whenever the set of windows on a workspace changed: a window appeared,
-was closed, minimized, unminimized or moved to another workspace. `windowIds` lists all
-windows now on that workspace; it is empty when the workspace became empty. A move fires the
+Sent after a refresh whenever the windows on a workspace changed: a window appeared, was
+closed, minimized, unminimized, moved to another workspace or switched between floating and
+tiling. `windowIds` lists all windows now on that workspace; it is empty when the workspace became empty. A move fires the
 event for both workspaces.
 
 It describes AeroSpace's model after it has been reconciled, not raw accessibility
