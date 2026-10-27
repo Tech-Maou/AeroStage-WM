@@ -91,9 +91,19 @@ cat > "$APP/Contents/Info.plist" <<EOF
 EOF
 plutil -lint "$APP/Contents/Info.plist" > /dev/null
 
-IDENTITY="${AEROSTAGE_SIGN_IDENTITY:-AeroStage Dev}"
-if ! security find-identity -p codesigning | grep -q "\"$IDENTITY\""; then
-    echo "Certificate \"$IDENTITY\" not found, signing ad-hoc" >&2
+# Signing identity: $AEROSTAGE_SIGN_IDENTITY, else "AeroStage Release" (long-lived, used for
+# releases so macOS permissions survive updates), else "AeroStage Dev", else ad-hoc.
+IDENTITY="${AEROSTAGE_SIGN_IDENTITY:-}"
+if [[ -z "$IDENTITY" ]]; then
+    for candidate in "AeroStage Release" "AeroStage Dev"; do
+        if security find-identity -p codesigning | grep -q "\"$candidate\""; then
+            IDENTITY="$candidate"
+            break
+        fi
+    done
+fi
+if [[ -z "$IDENTITY" ]] || ! security find-identity -p codesigning | grep -q "\"$IDENTITY\""; then
+    echo "No code signing certificate found, signing ad-hoc" >&2
     IDENTITY="-"
 fi
 # Nested code first, then the app itself.

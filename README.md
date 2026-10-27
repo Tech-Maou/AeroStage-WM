@@ -120,6 +120,9 @@ ln -s "/Applications/AeroStage WM.app/Contents/Resources/bin/aerostage-wm" /opt/
 - `main` is the released state, `dev` is where changes are made and tested.
 - `scripts/release.sh [version]` builds `dist/AeroStage-WM-v<version>.zip` for a GitHub release,
   prints its SHA256 and updates the cask in `../homebrew-tap` if it is checked out there.
+- `scripts/publish.sh <version>` does the whole release: dev → main, tag, zip signed with the
+  long-lived "AeroStage Release" certificate (keeps the Accessibility permission across
+  updates), GitHub release with the notes from [CHANGELOG.md](CHANGELOG.md), Homebrew cask.
 
 ## Tests
 
