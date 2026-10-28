@@ -9,6 +9,7 @@ struct AeroSpaceApp: App {
     @StateObject var messageModel = MessageModel.shared
     @Environment(\.openWindow) var openWindow: OpenWindowAction
     @AppStorage("hideMenuBarItem") var hideMenuBarItem = false // AeroStage WM
+    @NSApplicationDelegateAdaptor(AeroStageWMAppDelegate.self) var appDelegate // AeroStage WM
 
     init() {
         initAppBundle()

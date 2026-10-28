@@ -2,6 +2,13 @@
 
 AeroStage WM versions name the AeroSpace release they are based on.
 
+## 0.21.3-stage.5
+
+- Fixed: AeroStage WM quit after typing into a password field (or any other field that turns on
+  macOS Secure Input). Its small Secure Input badge was then its only window, and with the menu
+  bar item hidden, closing that last window made the app quit. It now never quits because a
+  window closed; the same applied to the volume display and the message window.
+
 ## 0.21.3-stage.4
 
 - The menu items "Quit" and "Enable/Disable" no longer have the shortcuts ⌘Q and ⌘E, so

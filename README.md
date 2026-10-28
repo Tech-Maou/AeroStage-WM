@@ -29,6 +29,7 @@ that the CLI is called `aerostage-wm` instead of `aerospace`.
 | Menu bar item | always shown | can be hidden (user default `hideMenuBarItem`, set by AeroStage), stays visible while Accessibility permission is missing |
 | Quitting | windows of hidden workspaces stay parked in the screen corner unless quit from the menu | windows return to the screen on every regular quit (menu, quit Apple Event, SIGTERM); macOS may not terminate it on its own |
 | Menu shortcuts | ⌘Q quits, ⌘E enables/disables | no ⌘Q/⌘E, so it cannot be quit or disabled by accident |
+| Closing its last window | quits the app (harmless while the menu bar item is shown) | never quits, so the Secure Input badge closing after a password field cannot end it |
 
 All other code, commands and the JSON output of the CLI are unchanged.
 
